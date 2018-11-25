@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Pete's Pet Shop</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="css/main.css" rel="stylesheet">
+
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <h1>Blockchain Bootcamp For Business Professionals</h1>
+  <h2>Example Truffle Dapp</h2>
+  <br>
+  <h3>You have <span class="black"><span id="clicks"></span> Clicks</span></h3>
+  <br>
+  <h1>Send MetaCoin</h1>
+
+  <br><br><button id="send" onclick="addClick()">Add Click</button>
+  <br><br><button id="send" onclick="removeClick()">Remove Click</button>
+  <br>
+  <h3>Transaction Data</h3>
+  <br>
+  <pre id="transaction"></pre>
+  <br>
+  <br>
+  <h3>Transaction Receipt</h3>
+  <br>
+  <pre id="receipt"></pre>
+  <br>
+  <br>
+  <h3>
+    Transaction Cost
+  </h3>
+  <br>
+  INR:<span id="cost"></span>
+  <br>
+
+  <span class="hint"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/web3.min.js"></script>
+  <script src="js/truffle-contract.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
