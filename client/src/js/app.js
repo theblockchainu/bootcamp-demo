@@ -1,10 +1,11 @@
 var Web3 = require('web3');
 
 
-var web3 = new Web3(window.web3.currentProvider);
 
-const address = '0x98e0B975D0e3CCC8aE0F7fa6CD8ebA32A4359430';
-
+let ipaddress;
+let contractAddress;
+let openLab;
+let web3;
 const abi = [
   {
     "constant": true,
@@ -95,11 +96,6 @@ const abi = [
   }
 ];
 
-var contract = web3.eth.contract(abi);
-
-var openLab = contract.at(address);
-
-
 var addClick = () => {
   openLab.addClick({ from: web3.eth.accounts[0] }, (err, res) => {
     if (err) {
@@ -127,10 +123,13 @@ var removeClick = () => {
 
 
 var setClicks = function () {
-
   openLab.getClicks.call(function (e, r) {
     const status = document.getElementById('clicks')
-    status.innerHTML = r.c[0];
+    if (r) {
+      status.innerHTML = r.c[0];
+    } if (e) {
+      console.log(e);
+    }
   });
 }
 
@@ -158,4 +157,42 @@ getGasCost = function (gasAmount) {
   status.innerHTML = totalcost;
 }
 
-setClicks();
+
+var start = function () {
+  ipaddress = document.getElementById('ipaddress').value;
+  contractAddress = document.getElementById('contractAddress').value;
+
+
+
+  if (ipaddress && contractAddress) {
+
+    if (typeof web3 !== 'undefined') {
+      console.warn(
+        'Using web3 detected from external source.' +
+        ' If you find that your accounts don\'t appear or you have 0 MetaCoin,' +
+        ' ensure you\'ve configured that source properly.' +
+        ' If using MetaMask, see the following link.' +
+        ' Feel free to delete this warning. :)' +
+        ' http://truffleframework.com/tutorials/truffle-and-metamask'
+      )
+      // Use Mist/MetaMask's provider
+      window.web3 = new Web3(web3.currentProvider)
+    } else {
+      console.warn(
+        'No web3 detected. Falling back to http://127.0.0.1:9545.' +
+        ' You should remove this fallback when you deploy live, as it\'s inherently insecure.' +
+        ' Consider switching to Metamask for development.' +
+        ' More info here: http://truffleframework.com/tutorials/truffle-and-metamask'
+      )
+      // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+      window.web3 = new Web3(new Web3.providers.HttpProvider(ipaddress))
+    }
+
+    web3 = new Web3(window.web3.currentProvider);
+    var contract = web3.eth.contract(abi);
+    openLab = contract.at(contractAddress);
+  }
+
+  setClicks();
+
+}
